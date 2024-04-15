@@ -1,5 +1,8 @@
 package org.example.kotlin_jogos.modelos
 
+import lombok.experimental.NonFinal
+import java.time.LocalDate
+import java.time.Period
 import java.util.Scanner
 import kotlin.random.Random
 
@@ -18,6 +21,7 @@ data class Gamer(val nome: String, var email: String){
 
 
     val jogosBuscados = mutableListOf<Jogo?>()
+    val jogoAlugados = mutableListOf<Aluguel>()
 
     constructor(nome: String, email: String, dataNascimento: String,  usuario: String) : this (nome, email) {
         this.dataNascimento = dataNascimento
@@ -54,6 +58,14 @@ data class Gamer(val nome: String, var email: String){
         } else{
             throw IllegalArgumentException("Email inválido")
         }
+    }
+
+    fun alugaJogo(jogo: Jogo, periodoAluguel: PeriodoAluguel): Aluguel{
+        val aluguel = Aluguel(this, jogo, periodoAluguel)
+        jogoAlugados.add(aluguel)
+
+        return aluguel
+
     }
 
 
