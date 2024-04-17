@@ -7,10 +7,13 @@ data class Aluguel(
         val gamer: Gamer,
         val jogo: Jogo,
         val periodoAluguel: PeriodoAluguel,
-        val valorDoAluguel: Double = jogo.preco * periodoAluguel.aluguelEmDias
-) {
+        )
+{
+    val valorDoAluguel: Double = gamer.plano.obterValorAluguel(this)
     override fun toString(): String {
         return "Aluguel do Jogo ${jogo.titulo}, feito por ${gamer.nome} pelo valor de R$${valorDoAluguel} \n"
     }
+
+
 
 }

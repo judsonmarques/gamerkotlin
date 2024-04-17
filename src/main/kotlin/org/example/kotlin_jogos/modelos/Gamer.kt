@@ -6,7 +6,7 @@ import java.time.Period
 import java.util.Scanner
 import kotlin.random.Random
 
-data class Gamer(val nome: String, var email: String){
+data class Gamer(val nome: String, var email: String): Recomendavel{
     var dataNascimento: String? = null
     var usuario: String? = null
         set(value){
@@ -20,8 +20,23 @@ data class Gamer(val nome: String, var email: String){
         private set
 
 
+    var plano: Plano = PlanoAvulso("BRONZE")
     val jogosBuscados = mutableListOf<Jogo?>()
     val jogoAlugados = mutableListOf<Aluguel>()
+    private val jogosAlugados = mutableListOf<Aluguel>()
+    private val listaNotas = mutableListOf<Int>()
+
+    override val media: Double
+        get() = listaNotas.average()
+
+    override fun recomendar(nota: Int) {
+        if (nota < 1 || nota > 10) {
+            println("Nota inválida. Insira uma nota entre 1 e 10")
+        } else {
+            listaNotas.add(nota)
+        }
+    }
+
 
     constructor(nome: String, email: String, dataNascimento: String,  usuario: String) : this (nome, email) {
         this.dataNascimento = dataNascimento
@@ -37,8 +52,15 @@ data class Gamer(val nome: String, var email: String){
 //        this.email = validarEmail()
 //           }
 
+
     override fun toString(): String {
-        return "Gamer(nome=' $nome', email=' $email', dataNascimento= $dataNascimento, usuario= $usuario, idInterno= $idInterno)"
+        return "Gamer:\n" +
+                "(nome=' $nome'\n" +
+                " email=' $email'\n" +
+                " dataNascimento= $dataNascimento,\n" +
+                " usuario= $usuario\n" +
+                " idInterno= $idInterno\n" +
+                "Reputação= $media"
     }
 
 
@@ -66,6 +88,12 @@ data class Gamer(val nome: String, var email: String){
 
         return aluguel
 
+    }
+
+    fun jogosDoMes(mes:Int): List<Jogo> {
+        return jogosAlugados
+                .filter { aluguel ->  aluguel.periodoAluguel.dataInicial.monthValue == mes}
+                .map { aluguel ->  aluguel.jogo}
     }
 
 
