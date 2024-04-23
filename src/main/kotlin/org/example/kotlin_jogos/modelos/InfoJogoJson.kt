@@ -1,10 +1,10 @@
 package org.example.kotlin_jogos.modelos
-    data class infoJogoJson(
+    data class InfoJogoJson(
             val titulo: String,
             val capa: String,
             val preco: Double,
             val descricao: String)
 
-fun infoJogoJson.criaJogo(): Jogo {
+fun InfoJogoJson.criaJogo(): Jogo {
     return Jogo(this.titulo, this.capa, this.preco, this.descricao)
 }

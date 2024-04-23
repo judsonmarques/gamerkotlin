@@ -54,8 +54,8 @@ class ConsumoApi {
         val json = consomeDados(endereco)
 
         val gson = Gson()
-        val meuJogoTipo = object : TypeToken<List<infoJogoJson>>() {}.type
-        val listaJogo: List<infoJogoJson> = gson.fromJson(json, meuJogoTipo)
+        val meuJogoTipo = object : TypeToken<List<InfoJogoJson>>() {}.type
+        val listaJogo: List<InfoJogoJson> = gson.fromJson(json, meuJogoTipo)
 
         val listaJogoConvertida = listaJogo.map { infoJogoJson -> infoJogoJson.criaJogo() }
 

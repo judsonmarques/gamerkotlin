@@ -1,6 +1,6 @@
 package org.example.kotlin_jogos.modelos
 
-class PlanoAvulso(tipoDePlano: String): Plano(tipoDePlano){
+class PlanoAvulso(tipoDePlano: String, id: Int = 0): Plano(tipoDePlano, id) {
 
     override fun obterValorAluguel(aluguel: Aluguel): Double {
         var valorOriginal = super.obterValorAluguel(aluguel)
@@ -9,6 +9,12 @@ class PlanoAvulso(tipoDePlano: String): Plano(tipoDePlano){
         }
         return valorOriginal
 
-        }
+    }
 
+    override fun toString(): String {
+        return "PlanoAvulso," +
+                "Tipo: $tipo," +
+                "Id: $id"
+
+    }
 }
